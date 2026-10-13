@@ -4,59 +4,59 @@
 
 ## ¿Cuánto cuesta el agua actualmente?
 
-La tarifa vigente del servicio de agua potable en Jutiapa es de Q3.00 por metro cúbico de agua consumido. La tarifa se aplica por igual a todos los clientes del servicio, sin distinción por tipo de uso. El cobro mensual depende del consumo registrado en el contador o medidor del cliente: se multiplica el consumo en metros cúbicos por Q3.00. Por ejemplo, si el consumo del mes fue de 15 m³, el cobro sería de Q45.00.
+La tarifa vigente del servicio de agua potable en el municipio de Jutiapa es de Q3.00 por cada metro cúbico consumido. Esta tarifa se aplica de manera única y general a todos los abonados del servicio, sin distinción de categorías de vivienda, comercio o industria. El cobro del mes se calcula multiplicando el volumen de metros cúbicos registrados en el medidor por Q3.00. Por ejemplo, ante un consumo mensual de 15 metros cúbicos, el importe a pagar corresponde exactamente a Q45.00 en concepto de agua.
 
 
-## ¿Dónde pago mi recibo de agua?
+## ¿Dónde y cómo pago mi recibo de agua?
 
-El recibo de agua (factura o cobro) se paga en la oficina municipal de agua, ubicada en la 4ta Calle 2-15, Zona 1, Jutiapa. La oficina acepta pagos en efectivo, tarjeta de crédito y tarjeta de débito. El horario de atención es de lunes a viernes de 8:00 a.m. a 4:00 p.m. y sábados de 8:00 a.m. a 12:00 p.m. Los pagos no se pueden realizar por teléfono ni por este chat.
+El recibo del servicio de agua potable (también llamado factura o cobro) se cancela exclusivamente en la ventanilla de la oficina municipal de agua, ubicada en la 4ta Calle 2-15, Zona 1, Jutiapa. En ventanilla se aceptan pagos en efectivo, tarjeta de crédito y tarjeta de débito. El horario de cobro es de lunes a viernes de 8:00 a.m. a 4:00 p.m. y sábados de 8:00 a.m. a 12:00 p.m. Por el momento no se reciben depósitos bancarios, transferencias ni pagos en línea, y los pagos no se realizan por este chat.
 
 
 ## ¿Cuánto tiempo tengo para pagar antes de que me cobren recargo?
 
-El plazo para pagar el recibo del servicio de agua sin recargo es de 15 días calendario a partir de la fecha de emisión. Después de los 15 días se aplica un recargo por mora del 10% sobre el monto total del recibo. Si después de 30 días el recibo sigue sin pagarse, la oficina puede proceder con el corte del servicio de agua.
+El período ordinario para cancelar el recibo de agua sin recargo adicional comprende 15 días calendario a partir de su emisión mensual. Una vez transcurridos esos 15 días, el sistema aplica un recargo por mora del 10% sobre el saldo adeudado, el cual se cobra al momento de liquidar la factura en ventanilla. Si el usuario acumula más de 30 días de impago desde la emisión del recibo, la cuadrilla municipal queda facultada para proceder con el corte y suspensión física del servicio de agua en el inmueble.
 
 
 ## ¿Cómo sé cuánta agua consumí este mes?
 
-El consumo mensual de agua se puede verificar en el recibo del servicio. El recibo muestra la lectura anterior y la lectura actual del contador o medidor. La diferencia entre ambas lecturas es el consumo del mes en metros cúbicos. También se puede revisar el contador físicamente: el número que muestra el contador en cualquier momento indica la lectura acumulada total. La diferencia entre la lectura actual del contador y la lectura anterior que aparece en el último recibo indica el consumo acumulado desde la última facturación.
+El volumen de agua consumido en el mes se consulta revisando el recibo emitido por la oficina municipal. En la factura se indican dos cifras principales: la lectura anterior y la lectura actual capturadas en el medidor; la resta entre ambas representa los metros cúbicos netos del mes facturado. También es posible verificarlo en el contador físico del domicilio: anotando la numeración que marca el aparato en el día y restándole la lectura anterior indicada en el último recibo disponible, lo que revela el consumo acumulado transcurrido hasta la fecha.
 
 
 ## ¿Qué hago si mi recibo viene muy alto?
 
-Si el recibo del servicio de agua tiene un monto más alto de lo esperado, se recomienda primero revisar si hay fugas de agua dentro de la propiedad (tuberías, llaves, sanitarios, tinacos). Las fugas internas son la causa más común de consumo elevado y el agua que se fuga sí se registra en el contador o medidor. Si no hay fugas visibles, el cliente puede solicitar una revisión de la lectura del contador en la oficina municipal de agua. Si se confirma que la lectura es correcta, el cobro es válido.
+Si el valor facturado supera ampliamente el promedio habitual, se aconseja en primer lugar verificar si existen fugas ocultas en tuberías, llaves, sanitarios, tanques o pilas del inmueble. El agua que se desperdicia internamente cruza el medidor y es facturada en su totalidad en el recibo. Si tras revisar las instalaciones particulares no se hallan desperfectos, el abonado puede acudir a la oficina municipal de agua de Jutiapa con su DPI y recibo para solicitar formalmente una inspección y verificación de lectura del contador por parte de un técnico municipal.
 
 
 ## ¿Puedo pagar un recibo de un mes anterior?
 
-Sí, los recibos de meses anteriores que no han sido pagados se pueden cancelar en cualquier momento en la oficina municipal de agua. Los recibos que tienen más de 15 días de emitidos incluyen un recargo por mora del 10%. Es recomendable pagar todos los recibos pendientes para evitar el corte del servicio, que puede ocurrir después de 30 días de atraso.
+Sí, las facturas pendientes de meses anteriores pueden cancelarse en la ventanilla de la oficina municipal de agua de Jutiapa. Si el recibo supera los 15 días calendario desde su fecha de emisión, el sistema liquidará automáticamente en caja el monto del consumo mensual más el 10% de recargo por mora correspondiente. Se recomienda no demorar la cancelación de recibos atrasados, ya que acumular más de 30 días continuos sin pago coloca la conexión en riesgo inminente de suspensión física del suministro por parte del personal de campo.
 
 
 ## ¿Cada cuánto pasan a leer el medidor?
 
-La lectura del contador o medidor de agua se realiza una vez al mes. Un empleado de la oficina municipal de agua visita el domicilio del cliente para registrar la lectura actual del medidor. La lectura se toma durante el período activo del mes y se registra en el sistema HidroGest. A partir de esa lectura se genera el recibo del mes correspondiente. Los períodos de lectura son mensuales y van del primer día al último día de cada mes.
+La toma de lecturas en los contadores o medidores de agua se lleva a cabo una vez al mes de manera programada. Un lector municipal visita el domicilio del abonado durante el período de medición activo y registra en el sistema HidroGest la cifra acumulada que marca la carátula del equipo. A partir de esa lectura ingresada, el sistema calcula la diferencia respecto al mes anterior y genera de forma automática la factura correspondiente al ciclo mensual. Los ciclos de lectura se organizan por rutas y sectores dentro del municipio de Jutiapa.
 
 
-## ¿Puedo consultar mi estado de cuenta por teléfono?
+## ¿Cómo puedo consultar mi saldo y estado de cuenta?
 
-Sí, el cliente puede llamar al teléfono de la oficina municipal de agua 7844-1000 durante el horario de atención para consultar si tiene recibos pendientes y el monto total adeudado. Para la consulta telefónica, se necesita proporcionar el nombre completo del titular o el número de cuenta. La consulta telefónica solo es informativa; para realizar pagos o trámites se debe acudir a la oficina en persona.
+El saldo actual y estado de cuenta (al día o con facturas pendientes) puede consultarse de tres maneras accesibles: ingresando al portal web de consulta pública con su número de cuenta o medidor tras validar el captcha de seguridad; llamando a la oficina de agua al teléfono 7844-1000 en horarios de atención; o acercándose a la ventanilla de la sede municipal en la 4ta Calle 2-15, Zona 1. Para la llamada telefónica o consulta web se requiere tener a mano el número de cuenta o el nombre completo del titular registrado.
 
 
 ## ¿Qué pasa si no estoy cuando pasan a leer el medidor?
 
-Si el empleado de la oficina no puede acceder al contador o medidor para tomar la lectura, se puede programar una segunda visita. El cliente puede comunicarse al teléfono 7844-1000 para coordinar una visita en un horario en que el contador sea accesible. Es importante que el contador o medidor esté en un lugar donde el empleado pueda leerlo sin dificultad. Si el medidor está dentro de la propiedad y no hay acceso, el cliente debe facilitar la lectura.
+Si el medidor o contador se encuentra dentro de la propiedad privada y el lector municipal no tiene acceso visual para capturar la medición del mes, el vecino puede comunicarse al número telefónico 7844-1000 para coordinar una segunda visita o brindar facilidades de acceso al inmueble. Se exhorta cordialmente a todos los usuarios a mantener despejado el frente del contador para permitir que las lecturas mensuales se registren con puntualidad, evitando así retrasos en la facturación o la necesidad de estimaciones en el cobro del período.
 
 
 ## ¿Cómo sé si mi pago ya fue registrado?
 
-Una vez que el cliente realiza el pago del recibo en la oficina, el personal registra el pago en el sistema HidroGest y el estado del recibo cambia de "Pendiente" a "Pagado". El cliente puede verificar que su pago fue registrado llamando al teléfono 7844-1000 y consultando su estado de cuenta, o presentándose en la oficina con su comprobante de pago. Cada pago registrado queda asociado a un recibo específico.
+Al cancelar en la ventanilla de la oficina municipal, el cajero procesa el cobro en el sistema HidroGest y entrega un comprobante de pago con sello oficial, actualizando inmediatamente el estado de la factura a pagado. El usuario puede confirmar la cancelación en tiempo real accediendo al portal web de consulta pública mediante su número de cuenta y captcha, o bien comunicándose por teléfono al 7844-1000 para verificar que su cuenta ya no presenta adeudos pendientes en el registro municipal de agua.
 
 
 ## ¿Me pueden reconectar el mismo día que pago?
 
-Cuando el servicio de agua fue cortado por falta de pago y el cliente paga la totalidad de la deuda pendiente, la reconexión puede tomar entre 1 y 3 días hábiles. La reconexión no se realiza el mismo día del pago porque requiere que un empleado visite el domicilio para restablecer la conexión física del servicio. El cliente recibirá servicio nuevamente una vez que el equipo de la oficina realice la reconexión en su sector.
+Cuando el servicio de agua ha sido cortado por mora y el usuario liquida la totalidad de la deuda en ventanilla, la reconexión física del suministro no se efectúa el mismo día del pago. El restablecimiento del servicio toma un período estimado de 1 a 3 días hábiles posteriores a la cancelación. Este tiempo es requerido para que la cuadrilla de fontanería municipal programe la orden de trabajo y ejecute la reapertura de la llave de paso en la acometida del sector correspondiente.
 
 
 ## ¿Qué documentos necesito para hacer un trámite?
 
-Para la mayoría de trámites en la oficina municipal de agua de Jutiapa se necesita el DPI (Documento Personal de Identificación) vigente del titular de la cuenta. Para cambio de titular también se requiere el DPI del nuevo titular y copia de la escritura del inmueble. Para reclamos, se necesita el recibo que se desea disputar. Para pagos, se recomienda llevar el número de recibo o número de cuenta para agilizar la atención.
+Para gestionar trámites en la oficina municipal de agua de Jutiapa se requiere presentar el DPI original y vigente del titular de la cuenta. En caso de solicitar un cambio de titular, es indispensable adjuntar el DPI del nuevo propietario, fotocopia simple de la escritura pública del inmueble y el comprobante del último recibo debidamente cancelado. Para reclamar inconformidades en el cobro se debe presentar la factura cuestionada junto con el DPI del titular ante el módulo de atención en ventanilla.

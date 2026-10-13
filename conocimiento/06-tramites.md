@@ -4,26 +4,26 @@
 
 ## ¿Qué trámites se pueden realizar en la oficina de agua?
 
-En la oficina municipal de agua de Jutiapa se pueden realizar los siguientes trámites presenciales: cambio de titular de la cuenta, baja o cancelación del servicio, actualización de datos del cliente (teléfono, dirección), solicitud de revisión del contador o medidor, y consulta de estado de cuenta. Todos los trámites se realizan de lunes a viernes de 8:00 a.m. a 4:00 p.m. y sábados de 8:00 a.m. a 12:00 p.m. Ningún trámite puede realizarse por teléfono ni por este chat. El cliente o su representante legal debe presentarse en la oficina con documentación vigente.
+En la oficina municipal de agua de Jutiapa se atienden de forma presencial los siguientes trámites administrativos: cambio de titularidad de la cuenta, cancelación o baja definitiva del servicio, actualización de datos de contacto del cliente (número de teléfono o dirección) y solicitudes de inspección física del contador o medidor. Las gestiones administrativas formales requieren la presencia física del interesado en la 4ta Calle 2-15, Zona 1, de lunes a viernes de 8:00 a.m. a 4:00 p.m. y sábados de 8:00 a.m. a 12:00 p.m. En contraste, la simple consulta de saldo y estado de cuenta no exige presentarse a ventanilla, ya que puede realizarse llamando al 7844-1000 o mediante el portal web de consulta pública.
 
 
 ## ¿Cómo se realiza un cambio de titular de la cuenta?
 
-El cambio de titular de la cuenta del servicio de agua se realiza cuando el inmueble cambia de propietario o cuando se necesita transferir la titularidad a otra persona. Para realizar el cambio, se debe presentar en la oficina municipal de agua en Jutiapa con los siguientes documentos:
+El cambio de titular de la cuenta del servicio de agua se solicita cuando un inmueble es vendido, transferido o heredado, para que los recibos futuros salgan a nombre del nuevo dueño. Para tramitar el cambio, las personas involucradas deben presentarse en la oficina municipal de agua de Jutiapa con los siguientes requisitos:
 
-- DPI (Documento Personal de Identificación) del titular actual
-- DPI del nuevo titular
-- Fotocopia de la escritura del inmueble o contrato de compraventa
-- Último recibo de agua pagado (la cuenta debe estar al día, sin recibos pendientes)
+- Original y fotocopia del DPI del titular registrado actualmente
+- Original y fotocopia del DPI del nuevo titular responsable
+- Fotocopia simple del testimonio de la escritura pública del inmueble o contrato legal de compraventa
+- Comprobante del último recibo de agua debidamente cancelado (la cuenta no debe registrar mora ni saldo pendiente)
 
-El trámite se realiza el mismo día si toda la documentación está completa. No tiene costo adicional. El nuevo titular asume la responsabilidad de los pagos a partir de la fecha del cambio.
+El trámite se resuelve durante la misma jornada si la papelería está completa, no tiene costo administrativo y transfiere las responsabilidades de pago a partir de esa fecha.
 
 
 ## ¿Cómo se da de baja el servicio de agua?
 
-La baja o cancelación del servicio de agua potable se solicita cuando el cliente ya no desea continuar con el servicio. Para dar de baja la cuenta, el titular debe presentarse en la oficina municipal de agua con su DPI y el último recibo de agua pagado. La cuenta debe estar al día, sin recibos pendientes. Si hay recibos sin pagar, primero deben cancelarse antes de proceder con la baja. Una vez procesada la baja, el contador o medidor se desactiva en el sistema y ya no se registran más lecturas ni se generan más recibos para esa cuenta.
+La baja o cancelación del servicio de agua potable procede cuando el propietario decide suprimir definitivamente la conexión o el inmueble quedará deshabitado permanentemente. Para solicitar la baja, el titular del contrato debe acudir en persona a la oficina municipal de agua con su documento personal de identificación (DPI) y constancia de su última factura pagada. Es condición indispensable que la cuenta se encuentre completamente al día, sin saldos pendientes ni recargos por mora acumulados. Si existen adeudos, deberán liquidarse antes de autorizar la gestión. Una vez formalizada la baja, el sistema HidroGest desactiva el contador o medidor, impidiendo la generación de cobros en los períodos subsecuentes.
 
 
 ## ¿Cómo actualizo mis datos personales en el sistema?
 
-Para actualizar datos personales como el número de teléfono o la dirección registrada en la cuenta del servicio de agua, el cliente debe presentarse en la oficina municipal de agua de Jutiapa con su DPI vigente. El personal de la oficina puede modificar el teléfono y la dirección del cliente en el sistema. No se puede cambiar el nombre del titular mediante una actualización de datos; para eso se requiere un trámite de cambio de titular. La actualización de datos no tiene costo y se realiza en el momento.
+Para actualizar información de contacto como el número de teléfono o la nomenclatura de dirección física asociada a la cuenta del servicio de agua, el titular registrado debe presentarse en la oficina municipal de agua de Jutiapa portando su DPI vigente. El personal de atención ingresará al módulo de clientes del sistema HidroGest y modificará los campos requeridos en el momento. Esta actualización de datos personales no tiene costo económico alguno. Es importante señalar que mediante este procedimiento no es posible cambiar el nombre del propietario de la cuenta; cualquier traspaso de nombre exige cumplir con el trámite formal de cambio de titular.

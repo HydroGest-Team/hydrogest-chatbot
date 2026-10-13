@@ -4,49 +4,54 @@
 
 ## ¿Qué es un contador de agua?
 
-El contador de agua (también llamado medidor) es un aparato que se instala en la conexión de agua de cada inmueble para medir la cantidad de agua que pasa por la tubería. El contador registra el consumo acumulado en metros cúbicos (m³). Cada mes, un empleado de la oficina municipal de agua lee el número que marca el contador para calcular cuánta agua se consumió durante ese período. El contador tiene un código único que lo identifica dentro del sistema HidroGest y está vinculado a un solo cliente.
+El contador de agua (también denominado medidor) es el instrumento de precisión instalado en la acometida de cada inmueble para cuantificar el volumen de agua potable que ingresa desde la red municipal. El aparato acumula y muestra el consumo continuo en metros cúbicos. Mensualmente, el personal municipal efectúa la toma de lecturas para determinar el agua utilizada por el usuario en dicho ciclo. Cada contador posee un código alfanumérico identificador único registrado en la base de datos de HidroGest y permanece asociado a un único cliente y predio.
+
+
+## ¿Qué es el número de cuenta?
+
+El número de cuenta es el código numérico único asignado a cada usuario en el sistema HidroGest para registrar su contrato de suministro de agua potable. A diferencia del número de recibo, que varía con cada emisión mensual, el número de cuenta es permanente e identifica la conexión del inmueble. Este identificador se encuentra impreso en la parte superior del recibo de agua, al lado del nombre del titular, y es el dato necesario para consultar saldos en el portal web de consulta pública o solicitar información telefónica.
 
 
 ## ¿Qué es una lectura?
 
-La lectura es el número que marca el contador o medidor de agua en un momento determinado. Cada mes, un empleado de la oficina toma la lectura del contador visitando el domicilio del cliente. La lectura se registra en el sistema y se compara con la lectura del mes anterior para calcular el consumo. Por ejemplo, si la lectura del mes pasado fue 500 m³ y la lectura de este mes es 520 m³, el consumo del período fue de 20 m³. La lectura se expresa en metros cúbicos.
+La lectura es el registro numérico que exhibe la esfera del contador o medidor de agua en el instante en que es revisado por el inspector municipal. Se expresa en metros cúbicos enteros y decimales. Para fines de facturación se comparan dos mediciones: la lectura previa y la lectura del mes en curso; la resta entre ambas determina el consumo exacto que debe liquidarse. Cada lectura ingresada al sistema genera una marca de fecha y hora que garantiza la trazabilidad del consumo del abonado.
 
 
 ## ¿Qué es el consumo?
 
-El consumo es la cantidad de agua que un cliente utilizó durante un período, medido en metros cúbicos (m³). El consumo se calcula restando la lectura anterior de la lectura actual del contador o medidor. Por ejemplo, si la lectura anterior fue de 300 m³ y la lectura actual es de 325 m³, el consumo del período es de 25 m³. El consumo es el dato principal que se usa para calcular el monto del recibo, multiplicándolo por la tarifa vigente.
+El consumo es el volumen total de agua potable aprovechado en un predio durante el ciclo mensual de facturación, expresado en metros cúbicos. Se calcula deduciendo la lectura anterior de la lectura actual registrada por el lector municipal. Por ejemplo, si un medidor avanzó de 210 a 235 metros cúbicos, el consumo efectivo a liquidar corresponde a 25 metros cúbicos. Este valor constituye la base fundamental sobre la cual se multiplica la tarifa vigente para determinar el importe del cobro mensual.
 
 
 ## ¿Qué es un período?
 
-El período es el intervalo de tiempo durante el cual se mide el consumo de agua de los clientes. En HidroGest, cada período corresponde a un mes calendario. Un período tiene una fecha de apertura (el primer día del mes) y una fecha de cierre (el último día del mes). Los períodos pueden estar en dos estados: "Activo", cuando es el período actual en el que se están registrando lecturas, o "Cerrado", cuando ya finalizó y todas las lecturas de ese mes ya fueron registradas.
+El período representa el intervalo oficial de tiempo en el que se mide y factura el servicio de agua en el municipio de Jutiapa. Cada período abarca habitualmente un mes calendario completo, delimitado por una fecha de apertura y una fecha de cierre. Dentro de HidroGest, un período se clasifica como activo mientras los inspectores están capturando lecturas y procesando recibos; una vez completado el ciclo y consolidadas las mediciones de todos los sectores, el período adquiere formalmente el estado de cerrado, impidiendo alteraciones en los registros ya liquidados.
 
 
 ## ¿Qué es la tarifa del agua?
 
-La tarifa del agua es el precio que se cobra por cada metro cúbico (m³) de agua consumida. La tarifa se expresa en quetzales (Q) y determina cuánto paga el cliente por su consumo mensual. La tarifa vigente actualmente en Jutiapa es de Q3.00 por metro cúbico. La tarifa puede cambiar con el tiempo según lo determine la oficina municipal. Cuando la tarifa cambia, el nuevo precio se aplica a las lecturas registradas a partir de la nueva fecha de vigencia.
+La tarifa del agua es el precio reglamentario fijado por cada metro cúbico de agua potable consumido por los usuarios del municipio. Se expresa en quetzales por metro cúbico. En Jutiapa rige una tarifa única de Q3.00 por metro cúbico, aplicada a la totalidad de las cuentas sin segmentación por tipo de inmueble. Las variaciones en la tarifa se aprueban por disposición municipal y rigen de forma general para todos los consumos medidos a partir de su fecha oficial de vigencia.
 
 
 ## ¿Qué es un recibo de agua?
 
-El recibo de agua (también llamado factura o cobro) es el documento que detalla el consumo y el monto a pagar del servicio de agua potable durante un período específico. Cada recibo tiene un número único que lo identifica. El recibo incluye los datos del cliente, las lecturas del contador, el consumo calculado, la tarifa aplicada y el monto total. El recibo se genera automáticamente cuando el empleado registra la lectura mensual del contador en el sistema.
+El recibo de agua (también denominado factura o cobro) es el documento oficial emitido mensualmente por el sistema HidroGest donde se detalla la liquidación del servicio prestado durante el período. Cada recibo contiene el número de cuenta permanente, el número de recibo correlativo único, el nombre del abonado titular, los registros numéricos del medidor, el volumen de consumo facturado en metros cúbicos, la tarifa unitaria vigente y el monto base a cancelar en las cajas municipales. Este documento avala formalmente la obligación de pago mensual del usuario.
 
 
 ## ¿Qué es el monto del recibo?
 
-El monto del recibo es la cantidad de dinero en quetzales (Q) que el cliente debe pagar por su consumo de agua durante un período. El monto se calcula multiplicando el consumo del período (en metros cúbicos) por la tarifa vigente (en quetzales por metro cúbico). Por ejemplo, un consumo de 20 m³ con una tarifa de Q3.00 resulta en un monto de Q60.00. El monto no incluye cargos fijos; depende únicamente del consumo registrado en el contador.
+El monto del recibo es la cifra dineraria en quetzales que el usuario adeuda por el agua utilizada durante el mes. Se obtiene multiplicando los metros cúbicos consumidos por la tarifa unitaria en vigor. Por ejemplo, ante un consumo de 18 metros cúbicos y una tarifa de Q3.00, el monto base del recibo será de Q54.00. El recibo emitido no contiene cobros fijos adicionales; no obstante, si el pago se demora más de 15 días tras su emisión, se le sumará un recargo por mora del 10% al cancelar en ventanilla.
 
 
 ## ¿Qué significa que un recibo esté "Pendiente" o "Pagado"?
 
-Un recibo con estado "Pendiente" significa que el monto del servicio de agua aún no ha sido pagado por el cliente. Un recibo con estado "Pagado" significa que el cliente ya canceló el monto correspondiente en la oficina municipal de agua. Cuando el cliente paga en la oficina, el personal registra el pago en el sistema y el recibo cambia de "Pendiente" a "Pagado". Todos los recibos nacen en estado "Pendiente" y pasan a "Pagado" únicamente cuando se registra el pago en el sistema.
+En el sistema HidroGest, el estado de un recibo refleja con exactitud si el compromiso económico derivado del consumo mensual fue liquidado por el contribuyente. Todo recibo recién emitido se registra de manera automática con estado pendiente, indicando que el saldo aún no ha ingresado a las arcas municipales. En cuanto el cliente se presenta a ventanilla y efectúa el pago, el cajero asienta la transacción en el sistema y el recibo cambia inmediatamente al estado de pagado, quedando solventada formalmente la cuenta para dicho período.
 
 
 ## ¿Qué es el metro cúbico?
 
-El metro cúbico (m³) es la unidad de medida que se usa para medir el consumo de agua. Un metro cúbico equivale a 1,000 litros de agua. El contador o medidor de agua registra el consumo en metros cúbicos. La tarifa del servicio se cobra por cada metro cúbico consumido. Por ejemplo, si la tarifa es de Q3.00 por m³ y el consumo fue de 10 m³ (10,000 litros), el cobro del mes sería de Q30.00.
+El metro cúbico (simbolizado internacionalmente como m³) es la unidad reglamentaria del sistema métrico decimal empleada para cuantificar el volumen de agua potable consumido en los inmuebles. Un metro cúbico representa el equivalente exacto a 1,000 litros de líquido. Los medidores domiciliarios calculan el paso continuo del fluido en metros cúbicos, y sobre esta unidad de medida se calculan los importes monetarios del recibo mensual aplicando la tarifa municipal vigente por cada unidad registrada en la carátula. Conocer esta equivalencia permite a los usuarios monitorear de forma práctica su consumo familiar.
 
 
 ## ¿Qué es la mora o recargo?
 
-La mora o recargo es un cobro adicional que se aplica cuando el recibo del servicio de agua no se paga dentro del plazo establecido de 15 días. El recargo por mora es del 10% sobre el monto total del recibo. Por ejemplo, si el recibo es de Q60.00, el recargo por mora sería de Q6.00, quedando un total de Q66.00. El recargo se aplica para incentivar el pago oportuno del servicio de agua.
+La mora o recargo es la compensación económica del 10% que se impone cuando el recibo del servicio de agua no se cancela dentro del plazo voluntario de 15 días calendario posteriores a su fecha de emisión. Este 10% adicional no viene preimpreso en la factura original emitida al inicio del ciclo, sino que el sistema de cobro en ventanilla lo calcula y añade al total a liquidar cuando el usuario se presenta a pagar después de vencido el tiempo límite establecido.

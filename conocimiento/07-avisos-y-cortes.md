@@ -4,25 +4,25 @@
 
 ## ¿Por qué pueden cortar el servicio de agua?
 
-El servicio de agua potable puede ser cortado o suspendido por las siguientes razones:
+La suspensión o corte del servicio de agua potable puede suscitarse por tres causas concretas:
 
-- Falta de pago: cuando el cliente acumula más de 30 días sin pagar el recibo o factura del servicio
-- Manipulación del contador o medidor: si se detecta que el medidor fue alterado o intervenido de forma ilícita
-- Solicitud del cliente: cuando el titular solicita la baja voluntaria del servicio
+- Falta de pago prolongada: cuando una cuenta acumula más de 30 días calendario sin liquidar el recibo o factura emitida
+- Manipulación fraudulenta del contador o medidor: si se detectan alteraciones, conexiones clandestinas o violación de sellos en el aparato
+- Petición voluntaria del titular: al gestionar la baja administrativa formal del servicio en las oficinas municipales
 
-La causa más común de corte es la falta de pago. Cuando un recibo no se paga dentro de los primeros 15 días, se aplica un recargo del 10%. Si después de 30 días el recibo sigue sin pagarse, la oficina puede proceder con el corte del servicio.
+La razón más habitual de suspensión es la morosidad. Tras emitirse la factura mensual, el usuario cuenta con 15 días de gracia para cancelar sin recargo; vencido ese plazo incurre en un 10% de mora, y al superar los 30 días sin pago, la cuadrilla municipal puede suspender físicamente el suministro.
 
 
 ## ¿Cómo se avisa antes de un corte por falta de pago?
 
-Antes de realizar un corte del servicio de agua, la oficina municipal notifica al cliente. La notificación se realiza de la siguiente manera: después de los 15 días de plazo, el recibo entra en estado de mora con un recargo del 10%. Si al cumplirse 30 días desde la emisión del recibo el pago no se ha realizado, la oficina puede enviar un aviso de corte al domicilio del cliente. El corte se ejecuta si después del aviso el cliente no se presenta a regularizar su situación. Actualmente, la oficina no envía notificaciones por correo electrónico ni por SMS.
+Antes de suspender el suministro por falta de pago, la oficina municipal de agua notifica al vecino en mora. Cuando una factura rebasa los 15 días posteriores a su emisión, el sistema marca el saldo en mora con recargo del 10%. Si transcurren 30 días calendario desde la fecha de emisión del recibo y el abono aún no se concreta, la municipalidad puede emitir y entregar un aviso físico de cobro en el domicilio del abonado. El corte físico del suministro se ejecuta si tras dicho requerimiento no se solventa el pago en ventanilla. Actualmente, la municipalidad no remite notificaciones de corte mediante mensajes SMS ni correos electrónicos.
 
 
 ## ¿Qué debo hacer si me cortaron el servicio de agua?
 
-Si el servicio de agua fue cortado por falta de pago, el cliente debe presentarse en la oficina municipal de agua en la 4ta Calle 2-15, Zona 1, Jutiapa, y cancelar todos los recibos pendientes, incluyendo los recargos por mora. Una vez pagada la totalidad de la deuda, la oficina programa la reconexión del servicio. La reconexión puede tomar entre 1 y 3 días hábiles después de realizar el pago completo. El cliente debe estar al día en todos sus recibos para que se restablezca el servicio.
+Si el servicio de agua fue suspendido por acumulación de deuda, el titular de la cuenta debe acudir de inmediato a la oficina municipal de agua, en la 4ta Calle 2-15, Zona 1, Jutiapa. En ventanilla deberá liquidar la totalidad de los períodos atrasados, incluyendo los recargos por mora del 10% aplicables a cada recibo vencido. Una vez que el cajero registra la liquidación completa de la deuda en el sistema HidroGest, se programa la orden de reconexión. La reconexión física en el domicilio toma un lapso de 1 a 3 días hábiles. Es requisito indispensable no dejar saldos pendientes para reactivar el suministro.
 
 
-## ¿Pueden cortar el agua por mantenimiento?
+## ¿Pueden cortar el agua por mantenimiento y cómo saber si hay cortes en mi sector?
 
-Sí, la oficina municipal de agua puede realizar cortes temporales del servicio por mantenimiento o reparación de la red de distribución. Estos cortes son programados y la oficina avisa con anticipación a los sectores afectados. Los cortes por mantenimiento no generan cobro adicional al cliente y no afectan el estado de la cuenta. El servicio se restablece una vez finalizados los trabajos de mantenimiento. Para consultar si hay cortes programados en su sector, el cliente puede llamar al teléfono 7844-1000 durante el horario de atención.
+La administración municipal puede ejecutar cortes provisionales del suministro de agua cuando se efectúan trabajos técnicos de mantenimiento, empalmes o reparación de averías en la red de distribución. Estas interrupciones no conllevan ningún costo para el usuario ni alteran el estado de cuenta del cliente. Debido a que no existe una plataforma de avisos automatizada por mensaje de texto ni correo electrónico, para saber si hay cortes programados en su sector, llame al 7844-1000 durante el horario habitual de atención. El personal de la central telefónica le confirmará si su colonia o barrio tiene suspensiones técnicas vigentes y la hora estimada de restablecimiento.

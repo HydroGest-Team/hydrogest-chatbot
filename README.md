@@ -84,6 +84,28 @@ uvicorn app.main:app --reload
 - Endpoint de salud: [http://localhost:8000/health](http://localhost:8000/health) (devuelve `{"status": "ok"}`)
 - Documentación interactiva (Swagger): [http://localhost:8000/docs](http://localhost:8000/docs)
 
+### 3. Revisar el chunking del conocimiento
+
+El script de ingestión en modo de prueba solo lee los archivos Markdown de
+`conocimiento/`, valida su estructura y muestra estadísticas y ejemplos. No
+llama a APIs ni escribe datos:
+
+```bash
+python scripts/ingest.py --dry-run
+```
+
+La carpeta puede cambiarse con `CONOCIMIENTO_DIR`; si no se define, se usa
+`conocimiento`.
+
+### 4. Probar retrieval
+
+Después de ejecutar la ingesta, se puede evaluar la búsqueda semántica sin LLM:
+
+```bash
+python scripts/probar_retrieval.py
+python scripts/probar_retrieval.py --pregunta "¿Cuánto cuesta el metro cúbico?"
+```
+
 ---
 
 ## Contrato de API

@@ -1,113 +1,190 @@
-# hidrogest-chatbot
+# hydrogest-chatbot
 
-Esqueleto del servicio backend para el chatbot de HydroGest basado en FastAPI, Google Gemini (`google-genai`) y ChromaDB.
+Servicio backend para el chatbot de HydroGest basado en **Spring Boot 3**, **Spring AI** (Google GenAI Chat y Embeddings) y **PostgreSQL**. Incluye además el prototipo original en Python conservado para referencia en `prototipo-python/`.
 
 ---
 
-## Estructura del Proyecto
+## Estructura del Repositorio
 
 ```text
 hydrogest-chatbot/
-├── app/
-│   ├── config.py           # Configuración y validación de variables de entorno
-│   ├── dependencies.py     # Dependencia reutilizable para validación de X-API-Key
-│   ├── main.py             # Instancia de FastAPI y configuración de CORS
-│   ├── routes/
-│   │   └── health.py       # Endpoint GET /health (público)
-│   └── services/           # Lógica de negocio (vacío actualmente)
-├── scripts/
-│   └── probar_gemini.py    # Script de prueba de embedding y LLM con google-genai
-├── docs/
-│   └── contrato-api.md     # Contrato formal de la API
-├── data/                   # Directorio local para almacenamiento (excluido en git)
-├── conocimiento/           # Documentos base de conocimiento (existente)
-├── .env.example            # Plantilla de variables de entorno sin secretos
-├── .gitignore              # Excluye .env, data/, __pycache__/, entornos virtuales
-├── requirements.txt        # Dependencias del proyecto
+├── chatbot-service/                        # Servicio backend principal en Spring Boot
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/hydrogest/chatbot/
+│   │   │   │   ├── ChatbotServiceApplication.java
+│   │   │   │   ├── config/
+│   │   │   │   │   ├── ChatbotProperties.java    # Validación y mapeo de variables
+│   │   │   │   │   └── CorsConfig.java           # Configuración de CORS con ALLOWED_ORIGINS
+│   │   │   │   ├── controller/
+│   │   │   │   │   └── HealthController.java     # Endpoint público GET /health
+│   │   │   │   ├── runner/
+│   │   │   │   │   └── ProbarGeminiRunner.java   # Comando --probar-gemini
+│   │   │   │   └── security/
+│   │   │   │       └── ApiKeyAuthFilter.java     # Filtro de autenticación X-API-Key
+│   │   │   └── resources/
+│   │   │       ├── application.properties
+│   │   │       └── application-local.properties.example
+│   │   └── test/
+│   │       └── java/com/hydrogest/chatbot/
+│   │           ├── ChatbotServiceApplicationTests.java
+│   │           └── HealthAndSecurityTests.java
+│   ├── application-local.properties.example      # Plantilla de configuración local
+│   ├── mvnw / mvnw.cmd                          # Maven Wrapper multiplataforma
+│   └── pom.xml                                  # Dependencias de Spring Boot y Spring AI
+├── prototipo-python/                            # Prototipo original en Python (FastAPI/Chroma)
+│   ├── app/
+│   ├── scripts/
+│   ├── docs/
+│   ├── requirements.txt
+│   └── .env.example
+├── conocimiento/                                # Base de conocimiento Markdown (raíz)
+├── evaluacion/                                  # Banco de preguntas de evaluación (raíz)
+├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
 ---
 
-## Requisitos Previos
+## 1. Chatbot Service (Spring Boot)
 
-- Python 3.10 o superior.
+### Requisitos Previos
+
+- **Java 21** (o superior).
 - Clave de API de Google Gemini ([Google AI Studio](https://aistudio.google.com/)).
+- Maven Wrapper incluido (`./mvnw` o `.\mvnw.cmd`), no requiere instalación global de Maven.
+
+### Configuración y Variables de Entorno
+
+Spring Boot carga las propiedades desde variables de entorno del sistema o desde un archivo local `application-local.properties` (ignorado en git).
+
+Copia la plantilla `application-local.properties.example` como `application-local.properties` dentro de `chatbot-service/`:
+
+```properties
+# Google Gemini API (Obligatoria: la app falla al iniciar si falta)
+GEMINI_API_KEY=tu_gemini_api_key
+
+# Seguridad del Servicio (Obligatoria: validada en el header X-API-Key)
+SERVICE_API_KEY=tu_service_api_key
+
+# Modelos de Gemini
+EMBEDDING_MODEL=gemini-embedding-001
+LLM_MODEL=gemini-3.8-flash
+EMBEDDING_DIM=1536
+
+# Base de Datos PostgreSQL
+DB_URL=jdbc:postgresql://localhost:5432/hydrogest
+DB_USER=postgres
+DB_PASSWORD=tu_password
+
+# CORS: orígenes permitidos separados por comas
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
+
+# Parámetros RAG y Base de Conocimiento
+RAG_TOP_K=4
+UMBRAL_SIMILITUD=0.65
+CONOCIMIENTO_DIR=conocimiento
+```
+
+> **Validación de inicio:** La aplicación valida en el arranque la existencia de `GEMINI_API_KEY` y `SERVICE_API_KEY`. Si alguna de ellas falta, la aplicación se detiene de inmediato mostrando un mensaje explicativo claro en la consola.
+
+### Tabla de Propiedades
+
+| Propiedad / Variable | Tipo | Obligatoria | Valor por Defecto | Descripción |
+|---|---|---|---|---|
+| `GEMINI_API_KEY` | String | **Sí** | — | Clave de API para acceder a Google Gemini. |
+| `SERVICE_API_KEY` | String | **Sí** | — | Clave requerida en el header `X-API-Key` para endpoints protegidos. |
+| `EMBEDDING_MODEL` | String | No | `gemini-embedding-001` | Modelo para generar vectores de embedding. |
+| `LLM_MODEL` | String | No | `gemini-3.8-flash` | Modelo de lenguaje generativo. |
+| `EMBEDDING_DIM` | Integer | No | `1536` | Dimensión vectorial de los embeddings. |
+| `DB_URL` | String | No | `jdbc:postgresql://localhost:5432/hydrogest` | URL JDBC de conexión a PostgreSQL. |
+| `DB_USER` | String | No | `postgres` | Usuario de PostgreSQL. |
+| `DB_PASSWORD` | String | No | *(vacío)* | Contraseña de PostgreSQL. |
+| `ALLOWED_ORIGINS` | String | No | `http://localhost:3000,http://localhost:8000` | Orígenes permitidos por la política CORS. |
+| `RAG_TOP_K` | Integer | No | `4` | Cantidad de chunks más relevantes a recuperar. |
+| `UMBRAL_SIMILITUD` | Double | No | `0.65` | Umbral mínimo de similitud para retrieval. |
+| `CONOCIMIENTO_DIR` | String | No | `conocimiento` | Ruta a los documentos Markdown de conocimiento. |
 
 ---
 
-## Instalación y Configuración
+### Ejecución y Comandos
 
-1. **Crear y activar entorno virtual:**
-   ```bash
-   python -m venv .venv
-   # En Windows PowerShell:
-   .venv\Scripts\Activate.ps1
-   # En Linux / macOS:
-   source .venv/bin/activate
-   ```
+Desde la carpeta `chatbot-service/`:
 
-2. **Instalar dependencias:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+#### 1. Probar conexión y modelos de Gemini (`--probar-gemini`)
+Ejecuta la prueba de generación de un embedding (imprimiendo su dimensión) y realiza una llamada simple al LLM:
 
-3. **Configurar variables de entorno:**
-   Copia el archivo `.env.example` como `.env` y asigna tus credenciales:
-   ```bash
-   cp .env.example .env
-   ```
-
-   Variables clave:
-   - `GEMINI_API_KEY`: Tu clave de Google Gemini (obligatoria).
-   - `SERVICE_API_KEY`: Clave para autenticación del servicio vía header `X-API-Key` (obligatoria).
-   - `EMBEDDING_MODEL`: Modelo de embedding (ej. `gemini-embedding-exp-03-07`).
-   - `LLM_MODEL`: Modelo generativo (ej. `gemini-2.0-flash`).
-   - `CHROMA_PATH`: Directorio de persistencia de Chroma (`./data/chroma`).
-   - `ALLOWED_ORIGINS`: Lista de orígenes permitidos separados por comas para CORS.
-
----
-
-## Pruebas y Ejecución
-
-### 1. Probar conexión y modelos de Gemini
-Ejecuta el script de verificación para validar que el SDK genera embeddings y responde consultas al LLM:
 ```bash
-python scripts/probar_gemini.py
+# En Windows (PowerShell / CMD)
+.\mvnw.cmd spring-boot:run -Dspring-boot.run.arguments=--probar-gemini
+
+# En Linux / macOS
+./mvnw spring-boot:run -Dspring-boot.run.arguments=--probar-gemini
 ```
 
-### 2. Iniciar el servicio FastAPI
-```bash
-uvicorn app.main:app --reload
+Salida esperada:
+```text
+Iniciando verificación de conexión y modelos de Google Gemini con Spring AI...
+
+1. Generando embedding con modelo: gemini-embedding-001
+   Frase de prueba: «Prueba de generación de embedding para el chatbot HydroGest.»
+   [OK] Dimensión del vector generado: 3072
+
+2. Llamando al LLM con modelo: gemini-3.8-flash
+   Prompt: «Responde con una palabra: hola»
+   [OK] Respuesta del LLM: Hola
+
+Prueba de Gemini finalizada exitosamente.
 ```
 
-- Endpoint de salud: [http://localhost:8000/health](http://localhost:8000/health) (devuelve `{"status": "ok"}`)
-- Documentación interactiva (Swagger): [http://localhost:8000/docs](http://localhost:8000/docs)
-
-### 3. Revisar el chunking del conocimiento
-
-El script de ingestión en modo de prueba solo lee los archivos Markdown de
-`conocimiento/`, valida su estructura y muestra estadísticas y ejemplos. No
-llama a APIs ni escribe datos:
-
+#### 2. Iniciar el servidor web
 ```bash
-python scripts/ingest.py --dry-run
+# En Windows (PowerShell / CMD)
+.\mvnw.cmd spring-boot:run
+
+# En Linux / macOS
+./mvnw spring-boot:run
 ```
+El servidor iniciará en `http://localhost:8080`.
 
-La carpeta puede cambiarse con `CONOCIMIENTO_DIR`; si no se define, se usa
-`conocimiento`.
-
-### 4. Probar retrieval
-
-Después de ejecutar la ingesta, se puede evaluar la búsqueda semántica sin LLM:
-
+#### 3. Ejecutar pruebas automatizadas
 ```bash
-python scripts/probar_retrieval.py
-python scripts/probar_retrieval.py --pregunta "¿Cuánto cuesta el metro cúbico?"
+.\mvnw.cmd test
 ```
 
 ---
 
-## Contrato de API
+### Endpoints y Seguridad
 
-Para más detalles sobre autenticación con `X-API-Key`, CORS y endpoints, consulta [`docs/contrato-api.md`](docs/contrato-api.md).
+- **`GET /health`** (Público, sin clave):
+  Verifica que el servicio esté activo y respondiendo.
+  ```bash
+  curl -i http://localhost:8080/health
+  ```
+  Respuesta:
+  ```json
+  {
+    "status": "ok"
+  }
+  ```
+
+- **Filtro de Autenticación (`X-API-Key`)**:
+  Endpoints protegidos (como el futuro `/chat`) requieren el encabezado `X-API-Key`.
+  - Si falta el encabezado: responde `401 Unauthorized` con `{"detail": "Falta el encabezado de autenticación X-API-Key."}`.
+  - Si la clave es incorrecta: responde `403 Forbidden` con `{"detail": "X-API-Key inválida o no autorizada."}`.
+
+- **Actuator Health:**
+  Disponible en `http://localhost:8080/actuator/health`.
+
+---
+
+## 2. Prototipo en Python
+
+El prototipo original en FastAPI se encuentra preservado sin modificaciones en `prototipo-python/`.
+
+Para ejecutarlo:
+1. Navega a `prototipo-python/`.
+2. Activa el entorno virtual (`source .venv/bin/activate` o `.venv\Scripts\Activate.ps1`).
+3. Instala dependencias: `pip install -r requirements.txt`.
+4. Inicia FastAPI: `uvicorn app.main:app --reload`.

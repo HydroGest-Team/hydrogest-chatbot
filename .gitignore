@@ -221,3 +221,10 @@ __marimo__/
 
 # Project runtime data
 data/
+
+# Spring Boot & Java
+application-local.properties
+**/application-local.properties
+target/
+*.class
+.flattened-pom.xml

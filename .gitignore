@@ -221,3 +221,13 @@ __marimo__/
 
 # Project runtime data
 data/
+
+# Spring Boot & Java
+application-local.properties
+**/application-local.properties
+target/
+*.class
+.flattened-pom.xml
+
+# Docker local overrides
+docker-compose.override.yml

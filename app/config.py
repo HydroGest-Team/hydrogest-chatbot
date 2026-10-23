@@ -36,6 +36,7 @@ class Settings:
     embedding_model: str = os.getenv("EMBEDDING_MODEL", "gemini-embedding-001")
     llm_model: str = os.getenv("LLM_MODEL", "gemini-3.8-flash")
     chroma_path: str = os.getenv("CHROMA_PATH", "./data/chroma")
+    conocimiento_dir: str = os.getenv("CONOCIMIENTO_DIR", "conocimiento")
     allowed_origins: list[str] = field(default_factory=_get_allowed_origins)
 
 

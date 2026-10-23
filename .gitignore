@@ -228,3 +228,6 @@ application-local.properties
 target/
 *.class
 .flattened-pom.xml
+
+# Docker local overrides
+docker-compose.override.yml

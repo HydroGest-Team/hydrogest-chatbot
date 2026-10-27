@@ -25,6 +25,11 @@ public class ChatbotProperties {
     private String allowedOrigins = "http://localhost:3000,http://localhost:8000";
     private int rateLimitPerSession = 10;
     private int rateLimitPerIp = 30;
+    private String dynamodbEndpoint;
+    private String dynamodbRegion = "us-east-1";
+    private String dynamodbTable = "chatbot_conversaciones";
+    private boolean dynamodbCreateTable = false;
+    private int dynamodbTtlDays = 30;
 
     @PostConstruct
     public void validate() {
@@ -173,5 +178,45 @@ public class ChatbotProperties {
 
     public void setRateLimitPerIp(int rateLimitPerIp) {
         this.rateLimitPerIp = rateLimitPerIp;
+    }
+
+    public String getDynamodbEndpoint() {
+        return dynamodbEndpoint;
+    }
+
+    public void setDynamodbEndpoint(String dynamodbEndpoint) {
+        this.dynamodbEndpoint = dynamodbEndpoint;
+    }
+
+    public String getDynamodbRegion() {
+        return dynamodbRegion;
+    }
+
+    public void setDynamodbRegion(String dynamodbRegion) {
+        this.dynamodbRegion = dynamodbRegion;
+    }
+
+    public String getDynamodbTable() {
+        return dynamodbTable;
+    }
+
+    public void setDynamodbTable(String dynamodbTable) {
+        this.dynamodbTable = dynamodbTable;
+    }
+
+    public boolean isDynamodbCreateTable() {
+        return dynamodbCreateTable;
+    }
+
+    public void setDynamodbCreateTable(boolean dynamodbCreateTable) {
+        this.dynamodbCreateTable = dynamodbCreateTable;
+    }
+
+    public int getDynamodbTtlDays() {
+        return dynamodbTtlDays;
+    }
+
+    public void setDynamodbTtlDays(int dynamodbTtlDays) {
+        this.dynamodbTtlDays = dynamodbTtlDays;
     }
 }

@@ -52,12 +52,12 @@ public class RagService {
                 .toList();
 
         if (resultados.isEmpty() || similitudMaxima < properties.getUmbralSimilitud()) {
-            return new Respuesta(MENSAJE_SIN_INFORMACION, fuentes, similitudMaxima);
+            return new Respuesta(MENSAJE_SIN_INFORMACION, fuentes, similitudMaxima, false);
         }
 
         String contexto = construirContexto(resultados);
         String respuesta = llmClient.generar(sistema, contexto, pregunta);
-        return new Respuesta(respuesta, fuentes, similitudMaxima);
+        return new Respuesta(respuesta, fuentes, similitudMaxima, true);
     }
 
     private static String construirContexto(List<ChunkResultado> resultados) {
@@ -82,7 +82,11 @@ public class RagService {
         }
     }
 
-    public record Respuesta(String respuesta, List<Fuente> fuentes, double similitudMaxima) {}
+    public record Respuesta(
+            String respuesta,
+            List<Fuente> fuentes,
+            double similitudMaxima,
+            boolean usoLlm) {}
 
     public record Fuente(String archivo, String seccion) {}
 }

@@ -23,6 +23,10 @@ DB_PASSWORD=
 # CORS: origenes permitidos separados por comas
 ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
 
+# Limites de POST /chat por ventana de un minuto
+RATE_LIMIT_PER_SESSION=10
+RATE_LIMIT_PER_IP=30
+
 # Parametros RAG y Base de Conocimiento
 RAG_TOP_K=4
 UMBRAL_SIMILITUD=0.65

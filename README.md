@@ -51,7 +51,7 @@ hydrogest-chatbot/
 
 ### Requisitos Previos
 
-- **Java 21** (o superior).
+- **Java 25** (o superior).
 - Clave de API de Google Gemini ([Google AI Studio](https://aistudio.google.com/)).
 - Maven Wrapper incluido (`./mvnw` o `.\mvnw.cmd`), no requiere instalación global de Maven.
 
@@ -78,8 +78,12 @@ DB_URL=jdbc:postgresql://localhost:5432/hydrogest
 DB_USER=postgres
 DB_PASSWORD=tu_password
 
-# CORS: orígenes permitidos separados por comas
+# CORS: orígenes permitidos separados por comas (sin valor, no habilita CORS)
 ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
+
+# Límites de POST /chat por ventana de un minuto
+RATE_LIMIT_PER_SESSION=10
+RATE_LIMIT_PER_IP=30
 
 # Parámetros RAG y Base de Conocimiento
 RAG_TOP_K=4
@@ -101,7 +105,9 @@ CONOCIMIENTO_DIR=conocimiento
 | `DB_URL` | String | No | `jdbc:postgresql://localhost:5432/hydrogest` | URL JDBC de conexión a PostgreSQL. |
 | `DB_USER` | String | No | `postgres` | Usuario de PostgreSQL. |
 | `DB_PASSWORD` | String | No | *(vacío)* | Contraseña de PostgreSQL. |
-| `ALLOWED_ORIGINS` | String | No | `http://localhost:3000,http://localhost:8000` | Orígenes permitidos por la política CORS. |
+| `ALLOWED_ORIGINS` | String | No | *(vacío)* | Orígenes permitidos por la política CORS. |
+| `RATE_LIMIT_PER_SESSION` | Integer | No | `10` | Peticiones por minuto permitidas por `session_id`. |
+| `RATE_LIMIT_PER_IP` | Integer | No | `30` | Peticiones por minuto permitidas por IP. |
 | `RAG_TOP_K` | Integer | No | `4` | Cantidad de chunks más relevantes a recuperar. |
 | `UMBRAL_SIMILITUD` | Double | No | `0.65` | Umbral mínimo de similitud para retrieval. |
 | `CONOCIMIENTO_DIR` | String | No | `conocimiento` | Ruta a los documentos Markdown de conocimiento. |
@@ -170,9 +176,15 @@ El servidor iniciará en `http://localhost:8080`.
   ```
 
 - **Filtro de Autenticación (`X-API-Key`)**:
-  Endpoints protegidos (como el futuro `/chat`) requieren el encabezado `X-API-Key`.
-  - Si falta el encabezado: responde `401 Unauthorized` con `{"detail": "Falta el encabezado de autenticación X-API-Key."}`.
-  - Si la clave es incorrecta: responde `403 Forbidden` con `{"detail": "X-API-Key inválida o no autorizada."}`.
+  Los endpoints protegidos requieren el encabezado `X-API-Key`.
+  - Si falta o es incorrecto: responde `401 Unauthorized` con
+    `{"error":{"codigo":"UNAUTHORIZED","mensaje":"..."}}`.
+
+- **Chat (`POST /chat`)**:
+  Requiere `X-API-Key` y recibe `{ "session_id": "...", "mensaje": "..." }`.
+  `mensaje` debe tener entre 1 y 500 caracteres. La respuesta exitosa contiene
+  `{ "respuesta": "...", "fuentes": [...] }`. Los límites de peticiones son en
+  memoria y se aplican por sesión y por IP.
 
 - **Actuator Health:**
   Disponible en `http://localhost:8080/actuator/health`.

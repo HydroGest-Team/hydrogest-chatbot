@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
@@ -18,7 +20,9 @@ public class DynamoDbConfig {
                 .region(Region.of(properties.getDynamodbRegion()));
         if (properties.getDynamodbEndpoint() != null
                 && !properties.getDynamodbEndpoint().isBlank()) {
-            builder.endpointOverride(URI.create(properties.getDynamodbEndpoint()));
+            builder.endpointOverride(URI.create(properties.getDynamodbEndpoint()))
+                    .credentialsProvider(StaticCredentialsProvider.create(
+                            AwsBasicCredentials.create("local", "local")));
         }
         return builder.build();
     }

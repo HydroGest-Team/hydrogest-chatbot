@@ -22,15 +22,18 @@ public class RateLimitService {
         this.properties = properties;
     }
 
-    public boolean permitir(String sessionId, String ip) {
+    public synchronized boolean permitir(String sessionId, String ip) {
         long ahora = System.currentTimeMillis();
         boolean permitidoSesion = registrar("session:" + sessionId, ahora,
                 properties.getRateLimitPerSession());
-        boolean permitidoIp = registrar("ip:" + ip, ahora, properties.getRateLimitPerIp());
-        if (!permitidoSesion || !permitidoIp) {
+        if (!permitidoSesion) {
             return false;
         }
-        return true;
+        if (registrar("ip:" + ip, ahora, properties.getRateLimitPerIp())) {
+            return true;
+        }
+        retirarUltimaMarca("session:" + sessionId);
+        return false;
     }
 
     private boolean registrar(String clave, long ahora, int limite) {
@@ -45,6 +48,21 @@ public class RateLimitService {
             }
             marcas.addLast(ahora);
             return true;
+        }
+    }
+
+    private void retirarUltimaMarca(String clave) {
+        Deque<Long> marcas = counters.get(clave);
+        if (marcas == null) {
+            return;
+        }
+        synchronized (marcas) {
+            if (!marcas.isEmpty()) {
+                marcas.removeLast();
+            }
+            if (marcas.isEmpty()) {
+                counters.remove(clave, marcas);
+            }
         }
     }
 }

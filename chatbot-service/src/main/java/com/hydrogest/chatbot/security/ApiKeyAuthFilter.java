@@ -9,6 +9,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hydrogest.chatbot.api.ApiError;
 
 import java.io.IOException;
 
@@ -22,9 +24,11 @@ public class ApiKeyAuthFilter extends OncePerRequestFilter {
 
     public static final String API_KEY_HEADER = "X-API-Key";
     private final ChatbotProperties properties;
+    private final ObjectMapper objectMapper;
 
-    public ApiKeyAuthFilter(ChatbotProperties properties) {
+    public ApiKeyAuthFilter(ChatbotProperties properties, ObjectMapper objectMapper) {
         this.properties = properties;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -55,20 +59,27 @@ public class ApiKeyAuthFilter extends OncePerRequestFilter {
         String apiKeyHeader = request.getHeader(API_KEY_HEADER);
 
         if (apiKeyHeader == null || apiKeyHeader.trim().isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write("{\"detail\":\"Falta el encabezado de autenticación X-API-Key.\"}");
+            escribirError(response, HttpServletResponse.SC_UNAUTHORIZED, "UNAUTHORIZED",
+                    "Falta el encabezado de autenticación X-API-Key.");
             return;
         }
 
         String configuredKey = properties.getServiceApiKey();
         if (configuredKey == null || !configuredKey.equals(apiKeyHeader.trim())) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write("{\"detail\":\"X-API-Key inválida o no autorizada.\"}");
+            escribirError(response, HttpServletResponse.SC_UNAUTHORIZED, "UNAUTHORIZED",
+                    "X-API-Key inválida o no autorizada.");
             return;
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private void escribirError(
+            HttpServletResponse response, int status, String codigo, String mensaje)
+            throws IOException {
+        response.setStatus(status);
+        response.setContentType("application/json;charset=UTF-8");
+        objectMapper.writeValue(response.getWriter(),
+                new ApiError(new ApiError.Detalle(codigo, mensaje)));
     }
 }

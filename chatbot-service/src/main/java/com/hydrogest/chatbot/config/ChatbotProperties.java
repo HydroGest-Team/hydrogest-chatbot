@@ -21,7 +21,7 @@ public class ChatbotProperties {
     private String serviceApiKey;
     private int ragTopK = 4;
     private double umbralSimilitud = 0.65;
-    private String conocimientoDir = "conocimiento";
+    private String conocimientoDir = "../conocimiento";
     private String allowedOrigins = "http://localhost:3000,http://localhost:8000";
 
     @PostConstruct

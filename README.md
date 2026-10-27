@@ -1,235 +1,251 @@
-# hydrogest-chatbot
+# HydroGest Chatbot
 
-Servicio backend para el chatbot de HydroGest basado en **Spring Boot 3**, **Spring AI** (Google GenAI Chat y Embeddings) y **PostgreSQL**. Incluye además el prototipo original en Python conservado para referencia en `prototipo-python/`.
+Chatbot de HydroGest con arquitectura RAG. El repositorio contiene el servicio
+backend en Spring Boot, una interfaz web minimalista inspirada en SB Admin y el
+prototipo Python original conservado como referencia.
 
----
+## Arquitectura
 
-## Estructura del Repositorio
+```text
+Navegador
+   |
+   v
+Next.js + BFF (localhost:3000)
+   |  /api/health y /api/chat
+   v
+Spring Boot (localhost:8080)
+   |-- PostgreSQL + pgvector
+   |-- Gemini (embeddings y generación)
+   `-- DynamoDB Local o DynamoDB en AWS
+```
+
+El navegador nunca recibe `SERVICE_API_KEY`. El BFF mantiene la llave en el
+servidor y la envía al backend mediante `X-API-Key`.
+
+## Estructura
 
 ```text
 hydrogest-chatbot/
-├── chatbot-service/                        # Servicio backend principal en Spring Boot
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/com/hydrogest/chatbot/
-│   │   │   │   ├── ChatbotServiceApplication.java
-│   │   │   │   ├── config/
-│   │   │   │   │   ├── ChatbotProperties.java    # Validación y mapeo de variables
-│   │   │   │   │   └── CorsConfig.java           # Configuración de CORS con ALLOWED_ORIGINS
-│   │   │   │   ├── controller/
-│   │   │   │   │   └── HealthController.java     # Endpoint público GET /health
-│   │   │   │   ├── runner/
-│   │   │   │   │   └── ProbarGeminiRunner.java   # Comando --probar-gemini
-│   │   │   │   └── security/
-│   │   │   │       └── ApiKeyAuthFilter.java     # Filtro de autenticación X-API-Key
-│   │   │   └── resources/
-│   │   │       ├── application.properties
-│   │   │       └── application-local.properties.example
-│   │   └── test/
-│   │       └── java/com/hydrogest/chatbot/
-│   │           ├── ChatbotServiceApplicationTests.java
-│   │           └── HealthAndSecurityTests.java
-│   ├── application-local.properties.example      # Plantilla de configuración local
-│   ├── mvnw / mvnw.cmd                          # Maven Wrapper multiplataforma
-│   └── pom.xml                                  # Dependencias de Spring Boot y Spring AI
-├── prototipo-python/                            # Prototipo original en Python (FastAPI/Chroma)
-│   ├── app/
-│   ├── scripts/
-│   ├── docs/
-│   ├── requirements.txt
-│   └── .env.example
-├── conocimiento/                                # Base de conocimiento Markdown (raíz)
-├── evaluacion/                                  # Banco de preguntas de evaluación (raíz)
-├── .gitignore
-├── LICENSE
+├── chatbot-service/                 # API Spring Boot 3 / Java 25
+│   ├── src/main/java/               # RAG, API, seguridad y persistencia
+│   ├── src/main/resources/          # configuración y migraciones Flyway
+│   └── pom.xml
+├── frontend/                        # Next.js, React, TypeScript y BFF
+│   ├── app/                         # página y rutas /api
+│   ├── components/                  # interfaz SB Admin del asistente
+│   └── package.json
+├── conocimiento/                    # documentos Markdown para la ingesta
+├── evaluacion/                      # preguntas de evaluación del retrieval
+├── prototipo-python/                # prototipo FastAPI/Chroma original
+├── docker-compose.yml               # PostgreSQL/pgvector y DynamoDB Local
 └── README.md
 ```
 
----
+## Requisitos
 
-## 1. Chatbot Service (Spring Boot)
+- Java 25 (`JAVA_HOME` debe apuntar al JDK usado por el proyecto).
+- Node.js 20 o superior y npm.
+- Docker Desktop, para PostgreSQL/pgvector y DynamoDB Local.
+- Una clave de Gemini para embeddings y generación. Las pruebas de interfaz
+  descritas abajo no llaman a Gemini.
 
-### Requisitos Previos
+## Servicios locales
 
-- **Java 25** (o superior).
-- Clave de API de Google Gemini ([Google AI Studio](https://aistudio.google.com/)).
-- Maven Wrapper incluido (`./mvnw` o `.\mvnw.cmd`), no requiere instalación global de Maven.
+Desde la raíz del repositorio:
 
-### Configuración y Variables de Entorno
-
-Spring Boot carga las propiedades desde variables de entorno del sistema o desde un archivo local `application-local.properties` (ignorado en git).
-
-Copia la plantilla `application-local.properties.example` como `application-local.properties` dentro de `chatbot-service/`:
-
-```properties
-# Google Gemini API (Obligatoria: la app falla al iniciar si falta)
-GEMINI_API_KEY=tu_gemini_api_key
-
-# Seguridad del Servicio (Obligatoria: validada en el header X-API-Key)
-SERVICE_API_KEY=tu_service_api_key
-
-# Modelos de Gemini
-EMBEDDING_MODEL=gemini-embedding-001
-LLM_MODEL=gemini-3.8-flash
-EMBEDDING_DIM=1536
-
-# Base de Datos PostgreSQL
-DB_URL=jdbc:postgresql://localhost:5432/hydrogest
-DB_USER=postgres
-DB_PASSWORD=tu_password
-
-# CORS: orígenes permitidos separados por comas (sin valor, no habilita CORS)
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
-
-# Límites de POST /chat por ventana de un minuto
-RATE_LIMIT_PER_SESSION=10
-RATE_LIMIT_PER_IP=30
-
-# DynamoDB Local (en AWS se usa el proveedor de credenciales por defecto/IAM)
-DYNAMODB_ENDPOINT=http://localhost:8000
-AWS_REGION=us-east-1
-AWS_ACCESS_KEY_ID=local
-AWS_SECRET_ACCESS_KEY=local
-DYNAMODB_TABLE=chatbot_conversaciones
-DYNAMODB_CREATE_TABLE=true
-DYNAMODB_TTL_DAYS=30
-
-# Parámetros RAG y Base de Conocimiento
-RAG_TOP_K=4
-UMBRAL_SIMILITUD=0.65
-CONOCIMIENTO_DIR=conocimiento
-```
-
-> **Validación de inicio:** La aplicación valida en el arranque la existencia de `GEMINI_API_KEY` y `SERVICE_API_KEY`. Si alguna de ellas falta, la aplicación se detiene de inmediato mostrando un mensaje explicativo claro en la consola.
-
-### Tabla de Propiedades
-
-| Propiedad / Variable | Tipo | Obligatoria | Valor por Defecto | Descripción |
-|---|---|---|---|---|
-| `GEMINI_API_KEY` | String | **Sí** | — | Clave de API para acceder a Google Gemini. |
-| `SERVICE_API_KEY` | String | **Sí** | — | Clave requerida en el header `X-API-Key` para endpoints protegidos. |
-| `EMBEDDING_MODEL` | String | No | `gemini-embedding-001` | Modelo para generar vectores de embedding. |
-| `LLM_MODEL` | String | No | `gemini-3.8-flash` | Modelo de lenguaje generativo. |
-| `EMBEDDING_DIM` | Integer | No | `1536` | Dimensión vectorial de los embeddings. |
-| `DB_URL` | String | No | `jdbc:postgresql://localhost:5432/hydrogest` | URL JDBC de conexión a PostgreSQL. |
-| `DB_USER` | String | No | `postgres` | Usuario de PostgreSQL. |
-| `DB_PASSWORD` | String | No | *(vacío)* | Contraseña de PostgreSQL. |
-| `ALLOWED_ORIGINS` | String | No | *(vacío)* | Orígenes permitidos por la política CORS. |
-| `RATE_LIMIT_PER_SESSION` | Integer | No | `10` | Peticiones por minuto permitidas por `session_id`. |
-| `RATE_LIMIT_PER_IP` | Integer | No | `30` | Peticiones por minuto permitidas por IP. |
-| `DYNAMODB_ENDPOINT` | String | No | *(vacío)* | Endpoint opcional para DynamoDB Local; vacío usa AWS. |
-| `AWS_REGION` | String | No | `us-east-1` | Región del cliente DynamoDB. |
-| `DYNAMODB_TABLE` | String | No | `chatbot_conversaciones` | Tabla donde se registran los intercambios. |
-| `DYNAMODB_CREATE_TABLE` | Boolean | No | `false` | Crea la tabla al iniciar; útil para DynamoDB Local. |
-| `DYNAMODB_TTL_DAYS` | Integer | No | `30` | Días hasta la expiración del atributo TTL. |
-| `RAG_TOP_K` | Integer | No | `4` | Cantidad de chunks más relevantes a recuperar. |
-| `UMBRAL_SIMILITUD` | Double | No | `0.65` | Umbral mínimo de similitud para retrieval. |
-| `CONOCIMIENTO_DIR` | String | No | `conocimiento` | Ruta a los documentos Markdown de conocimiento. |
-
----
-
-### Ejecución y Comandos
-
-Desde la carpeta `chatbot-service/`:
-
-#### 1. Probar conexión y modelos de Gemini (`--probar-gemini`)
-Ejecuta la prueba de generación de un embedding (imprimiendo su dimensión) y realiza una llamada simple al LLM:
-
-```bash
-# En Windows (PowerShell / CMD)
-.\mvnw.cmd spring-boot:run -Dspring-boot.run.arguments=--probar-gemini
-
-# En Linux / macOS
-./mvnw spring-boot:run -Dspring-boot.run.arguments=--probar-gemini
-```
-
-Salida esperada:
-```text
-Iniciando verificación de conexión y modelos de Google Gemini con Spring AI...
-
-1. Generando embedding con modelo: gemini-embedding-001
-   Frase de prueba: «Prueba de generación de embedding para el chatbot HydroGest.»
-   [OK] Dimensión del vector generado: 3072
-
-2. Llamando al LLM con modelo: gemini-3.8-flash
-   Prompt: «Responde con una palabra: hola»
-   [OK] Respuesta del LLM: Hola
-
-Prueba de Gemini finalizada exitosamente.
-```
-
-#### 2. Iniciar el servidor web
-```bash
-# En Windows (PowerShell / CMD)
-.\mvnw.cmd spring-boot:run
-
-# En Linux / macOS
-./mvnw spring-boot:run
-```
-El servidor iniciará en `http://localhost:8080`.
-
-#### 3. Ejecutar pruebas automatizadas
-```bash
-.\mvnw.cmd test
-```
-
----
-
-### Endpoints y Seguridad
-
-- **`GET /health`** (Público, sin clave):
-  Verifica que el servicio esté activo y respondiendo.
-  ```bash
-  curl -i http://localhost:8080/health
-  ```
-  Respuesta:
-  ```json
-  {
-    "status": "ok"
-  }
-  ```
-
-- **Filtro de Autenticación (`X-API-Key`)**:
-  Los endpoints protegidos requieren el encabezado `X-API-Key`.
-  - Si falta o es incorrecto: responde `401 Unauthorized` con
-    `{"error":{"codigo":"UNAUTHORIZED","mensaje":"..."}}`.
-
-- **Chat (`POST /chat`)**:
-  Requiere `X-API-Key` y recibe `{ "session_id": "...", "mensaje": "..." }`.
-  `mensaje` debe tener entre 1 y 500 caracteres. La respuesta exitosa contiene
-  `{ "respuesta": "...", "fuentes": [...] }`. Los límites de peticiones son en
-  memoria y se aplican por sesión y por IP.
-
-- **Persistencia de conversaciones**:
-  Cada respuesta exitosa se registra de forma best-effort en DynamoDB con
-  `session_id` como clave de partición y `timestamp` como clave de ordenamiento.
-  También se guardan la pregunta, respuesta, fuentes, similitud máxima, si se
-  usó el LLM, latencia y TTL. Un fallo de DynamoDB se registra en el servidor,
-  pero no convierte una respuesta válida del chat en error.
-
-Para iniciar los servicios locales:
-
-```bash
+```powershell
 docker compose up -d postgres dynamodb-local
 ```
 
-Con `DYNAMODB_CREATE_TABLE=true`, el servicio crea
-`chatbot_conversaciones` al arrancar si todavía no existe. Las credenciales
-`local` son valores ficticios aceptados por DynamoDB Local y no deben usarse
-en AWS; en AWS se mantienen las credenciales por rol IAM del proveedor
-predeterminado del SDK.
+El backend usa PostgreSQL en `localhost:5432` y DynamoDB Local en
+`localhost:8000`. Los contenedores pueden comprobarse con:
 
-- **Actuator Health:**
-  Disponible en `http://localhost:8080/actuator/health`.
+```powershell
+docker compose ps
+```
 
----
+## Configuración del backend
 
-## 2. Prototipo en Python
+Copia la plantilla y completa los valores locales:
 
-El prototipo original en FastAPI se encuentra preservado sin modificaciones en `prototipo-python/`.
+```powershell
+Copy-Item chatbot-service\application-local.properties.example `
+  chatbot-service\application-local.properties
+```
 
-Para ejecutarlo:
-1. Navega a `prototipo-python/`.
-2. Activa el entorno virtual (`source .venv/bin/activate` o `.venv\Scripts\Activate.ps1`).
-3. Instala dependencias: `pip install -r requirements.txt`.
-4. Inicia FastAPI: `uvicorn app.main:app --reload`.
+Variables principales:
+
+| Variable | Obligatoria | Valor local sugerido | Uso |
+|---|---:|---|---|
+| `GEMINI_API_KEY` | Sí | clave de Google AI Studio | Embeddings y LLM |
+| `SERVICE_API_KEY` | Sí | clave local propia | Autenticación del backend |
+| `DB_URL` | No | `jdbc:postgresql://localhost:5432/hydrogest` | PostgreSQL |
+| `DB_USER` | No | `postgres` | Usuario de PostgreSQL |
+| `DB_PASSWORD` | No | según Docker | Contraseña de PostgreSQL |
+| `ALLOWED_ORIGINS` | No | `http://localhost:3000` | CORS |
+| `DYNAMODB_ENDPOINT` | No | `http://localhost:8000` | DynamoDB Local |
+| `DYNAMODB_CREATE_TABLE` | No | `true` | Crear tabla local al iniciar |
+| `DYNAMODB_TABLE` | No | `chatbot_conversaciones` | Tabla de conversaciones |
+| `AWS_REGION` | No | `us-east-1` | Región del cliente AWS |
+| `RAG_TOP_K` | No | `4` | Chunks recuperados por pregunta |
+| `UMBRAL_SIMILITUD` | No | `0.65` | Umbral mínimo de retrieval |
+
+Para DynamoDB Local se aceptan credenciales ficticias `local`. En AWS no se
+deben colocar llaves en el código: el SDK usa el proveedor estándar y el rol
+IAM de la aplicación.
+
+## Ejecutar el backend
+
+Desde `chatbot-service`:
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+El servicio queda disponible en `http://localhost:8080`.
+
+### Endpoints
+
+#### `GET /health`
+
+Endpoint público para comprobar disponibilidad:
+
+```powershell
+Invoke-WebRequest http://localhost:8080/health
+```
+
+Respuesta:
+
+```json
+{"status":"ok"}
+```
+
+#### `POST /chat`
+
+Requiere `X-API-Key` y un cuerpo JSON con `session_id` y `mensaje`. El mensaje
+debe tener entre 1 y 500 caracteres.
+
+```powershell
+$headers = @{ "X-API-Key" = "tu_service_api_key" }
+$body = '{"session_id":"demo-1","mensaje":"¿Cómo puedo obtener información?"}'
+Invoke-RestMethod http://localhost:8080/chat -Method Post `
+  -Headers $headers -ContentType "application/json" -Body $body
+```
+
+Respuesta exitosa:
+
+```json
+{
+  "respuesta": "...",
+  "fuentes": [
+    {"archivo": "tramites.md", "seccion": "Información general"}
+  ]
+}
+```
+
+Los errores siguen el formato:
+
+```json
+{"error":{"codigo":"UNAUTHORIZED","mensaje":"..."}}
+```
+
+Los límites se aplican en memoria por `session_id` y por IP. Las conversaciones
+se guardan de forma best-effort en DynamoDB con timestamp, fuentes, similitud,
+uso del LLM, latencia y TTL. Un fallo de DynamoDB no interrumpe una respuesta
+válida del chat.
+
+## Ejecutar el frontend y BFF
+
+Configura las variables del BFF:
+
+```powershell
+Copy-Item frontend\.env.example frontend\.env.local
+```
+
+Edita `frontend\.env.local`:
+
+```properties
+CHATBOT_API_URL=http://localhost:8080
+CHATBOT_API_KEY=la_misma_clave_de_SERVICE_API_KEY
+```
+
+Instala dependencias e inicia Next.js desde `frontend`:
+
+```powershell
+npm install
+npm run dev
+```
+
+Abre `http://localhost:3000`. La interfaz incluye:
+
+- Sidebar y navegación tipo SB Admin.
+- Estado del backend y métricas básicas de la sesión.
+- Chat responsive con contador de caracteres.
+- Visualización de las fuentes devueltas por el backend.
+- BFF `/api/health`, que reenvía el health check sin llamar a Gemini.
+- BFF `/api/chat`, que protege la API key y conserva los códigos de error.
+
+La llamada real al backend solo se produce al enviar una pregunta válida. Para
+validar conectividad sin Gemini, usa el indicador de estado o envía un mensaje
+vacío mediante el BFF: debe llegar al backend y devolver `400` por validación.
+
+## Ingesta y evaluación RAG
+
+Los runners del backend permiten ejecutar las tareas de migración:
+
+```powershell
+.\mvnw.cmd spring-boot:run -Dspring-boot.run.arguments=--ingestar
+.\mvnw.cmd spring-boot:run -Dspring-boot.run.arguments="--evaluar --pregunta `"texto`""
+.\mvnw.cmd spring-boot:run -Dspring-boot.run.arguments=--generar
+```
+
+La ingesta procesa `conocimiento/`, genera embeddings de 1536 dimensiones y
+almacena los chunks en PostgreSQL/pgvector. `--generar` sí llama al LLM y por
+eso requiere cuota disponible de Gemini; no forma parte de la prueba de
+conectividad visual.
+
+## Pruebas y validación
+
+Backend:
+
+```powershell
+cd chatbot-service
+.\mvnw.cmd test
+.\mvnw.cmd -DskipTests package
+```
+
+Frontend:
+
+```powershell
+cd frontend
+npm run build
+npm audit --omit=dev
+```
+
+La validación de integración realizada sin Gemini comprueba:
+
+1. `GET http://localhost:3000/api/health` devuelve `200` y
+   `{"status":"ok"}` cuando Spring Boot está activo.
+2. `POST http://localhost:3000/api/chat` llega al filtro del backend.
+3. Una solicitud autenticada con mensaje vacío devuelve `400` y
+   `error.codigo = "INVALID_REQUEST"`.
+4. La interfaz se renderiza sin errores de hidratación en el navegador.
+
+## Prototipo Python
+
+`prototipo-python/` conserva la implementación original con FastAPI, Chroma y
+los scripts de evaluación. Para ejecutarlo:
+
+```powershell
+cd prototipo-python
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+## Seguridad y secretos
+
+- No subas `.env`, `application-local.properties` ni `frontend/.env.local`.
+- Nunca expongas `CHATBOT_API_KEY` en componentes cliente ni en el navegador.
+- En AWS usa roles IAM y el proveedor estándar del SDK.
+- No registres API keys ni incluyas trazas internas en respuestas HTTP.

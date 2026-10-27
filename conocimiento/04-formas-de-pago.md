@@ -4,30 +4,30 @@
 
 ## ¿Dónde se paga el recibo del agua?
 
-El recibo del servicio de agua potable (también llamado factura o cobro) se paga directamente en la oficina municipal de agua de Jutiapa. La dirección de la oficina es: 4ta Calle 2-15, Zona 1, Jutiapa. También se puede realizar el pago mediante depósito bancario o pago en línea. Los pagos no se realizan por este chat ni por ningún otro medio digital fuera de los indicados. Para pagar en la oficina, el cliente debe presentarse dentro del horario de atención con su número de recibo o su número de cuenta.
+El recibo del servicio de agua potable (también conocido como factura o cobro) se paga de manera presencial y exclusiva en la oficina municipal de agua de Jutiapa. La sede se encuentra en la 4ta Calle 2-15, Zona 1, Jutiapa. Actualmente no están habilitados pagos mediante depósito bancario, transferencias electrónicas ni plataformas de pago en línea. Tampoco se pueden realizar pagos a través de este chatbot ni en el portal web de consulta pública. Para efectuar la cancelación de su factura, el titular o un representante debe acudir directamente a la ventanilla de cobros en los horarios de atención autorizados.
 
 
-## ¿Qué métodos de pago se aceptan?
+## ¿Qué métodos de pago se aceptan en ventanilla?
 
-La oficina municipal de agua de Jutiapa acepta los siguientes métodos de pago para cancelar el recibo o factura del servicio:
+En las ventanillas de cobro de la oficina municipal de agua de Jutiapa se aceptan únicamente los siguientes métodos de pago para cancelar recibos:
 
-- Efectivo: se paga directamente en la ventanilla de la oficina municipal de agua
-- Tarjeta de crédito: se puede pagar con tarjeta de crédito en la oficina
-- Tarjeta de débito: se puede pagar con tarjeta de débito en la oficina
+- Dinero en efectivo: entregado en moneda de curso legal (quetzales) al cajero
+- Tarjeta de crédito: procesada a través del terminal POS disponible en la oficina
+- Tarjeta de débito: procesada a través del terminal POS disponible en la oficina
 
-Al realizar el pago, el sistema registra el método utilizado, la fecha y el monto pagado. El personal de la oficina entrega un comprobante de pago al cliente.
+Cualquiera de estas modalidades se registra de forma inmediata en el sistema HidroGest con su respectiva fecha y hora. El cajero emite un comprobante físico sellado que certifica que el recibo cambió formalmente al estado de pagado.
 
 
 ## ¿Cuánto tiempo tengo para pagar el recibo?
 
-El plazo para pagar el recibo del servicio de agua es de 15 días calendario a partir de la fecha de emisión del recibo. El recibo se emite cuando el empleado registra la lectura del mes en el sistema. Si el pago se realiza dentro de los 15 días, no se aplica ningún recargo adicional. Es recomendable pagar lo antes posible para evitar acumulación de deuda y posibles cortes del servicio.
+El plazo ordinario para pagar el recibo del servicio de agua potable sin recargos es de 15 días calendario contados a partir de la fecha de emisión de la factura. Cada recibo se emite una vez al mes cuando el lector registra la medición del contador o medidor en el sistema municipal. Si el usuario cancela su cuenta dentro de este margen de 15 días, paga únicamente el monto base derivado de su consumo. Pagar oportunamente evita cobros adicionales y previene el riesgo de corte del servicio de agua.
 
 
-## ¿Hay recargo por pago tardío?
+## ¿Hay recargo por pago tardío y cómo se cobra?
 
-Sí, cuando el pago del recibo de agua no se realiza dentro de los primeros 15 días después de la emisión, se aplica un recargo por mora del 10% sobre el monto total del recibo. Por ejemplo, si el recibo es de Q60.00 y se paga después del plazo, el recargo sería de Q6.00, quedando un total a pagar de Q66.00. El recargo se aplica una sola vez, no se acumula mensualmente. Es importante pagar dentro del plazo para evitar este recargo adicional.
+Sí, cuando el recibo de agua no se cancela dentro de los 15 días calendario posteriores a su emisión, se aplica un recargo por mora del 10% sobre el monto base adeudado. El recibo impreso originalmente muestra solo el valor del consumo mensual; por tanto, el recargo del 10% no viene preimpreso, sino que el sistema de cobro en ventanilla lo calcula y suma de manera automática al momento de pagar. Por ejemplo, en una factura con monto base de Q60.00 pagada fuera de plazo, se sumarán Q6.00 de mora, pagando en total Q66.00. El recargo se aplica una sola vez por recibo vencido.
 
 
 ## ¿Se puede pagar más de un recibo a la vez?
 
-Sí, el cliente puede pagar varios recibos pendientes en una sola visita a la oficina. El personal de la oficina puede ubicar todos los recibos pendientes del cliente y registrar el pago de cada uno. Cada recibo se paga por el monto que le corresponde según la lectura y tarifa de ese período. No existe un descuento por pagar varios recibos juntos.
+Sí, cualquier usuario puede cancelar varios recibos vencidos o acumulados en una sola transacción en ventanilla. El personal de caja ingresa el número de cuenta o nombre del cliente en el sistema HidroGest, visualiza todas las facturas pendientes de pago y procesa el cobro total o individual según lo solicite el vecino. A cada recibo cancelado que supere los 15 días de atraso se le sumará su respectivo 10% de recargo por mora. Cancelar todos los períodos atrasados es indispensable para evitar la suspensión del suministro de agua.

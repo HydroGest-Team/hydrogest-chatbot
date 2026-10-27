@@ -4,25 +4,25 @@
 
 ## ¿Dónde queda la oficina del servicio de agua?
 
-La oficina municipal de agua potable de Jutiapa se encuentra ubicada en la 4ta Calle 2-15, Zona 1, Jutiapa, Guatemala. La oficina está a una cuadra del parque central de Jutiapa. En esta oficina se realizan todos los trámites relacionados con el servicio de agua: pagos de recibos, consultas sobre el cobro o factura, reportes de fugas, reclamos, cambio de titular y otros trámites administrativos.
+La oficina municipal de agua potable de Jutiapa se encuentra ubicada en la 4ta Calle 2-15, Zona 1, Jutiapa, Guatemala, a una cuadra de distancia del parque central de la cabecera departamental. En estas instalaciones físicas se llevan a cabo todas las gestiones presenciales del servicio: cancelación de recibos en ventanilla de cobros, presentación de reclamos por discrepancias en la factura, recepción de solicitudes de cambio de titular, bajas de servicio y reportes presenciales de averías. Los pagos y trámites formales no pueden realizarse por este chatbot; el usuario debe apersonarse a esta dirección municipal.
 
 
-## ¿Cuál es el horario de atención?
+## ¿Cuál es el horario de atención al público?
 
-La oficina municipal de agua de Jutiapa atiende al público en el siguiente horario:
+La oficina municipal de agua de Jutiapa atiende a los vecinos y usuarios del servicio en los siguientes horarios oficiales:
 
-- Lunes a viernes: de 8:00 a.m. a 4:00 p.m.
-- Sábados: de 8:00 a.m. a 12:00 p.m. (mediodía)
-- Domingos y días festivos: la oficina permanece cerrada
+- De lunes a viernes: horario continuo de 8:00 a.m. a 4:00 p.m.
+- Sábados: atención matutina de 8:00 a.m. a 12:00 p.m. (mediodía)
+- Domingos y días de asueto oficial o festivos nacionales: las instalaciones permanecen cerradas
 
-El horario de atención es continuo, sin cerrar al mediodía entre semana. Se recomienda llegar con anticipación, especialmente los primeros días del mes, cuando la afluencia de personas es mayor por los pagos de recibos.
-
-
-## ¿Cuál es el teléfono de la oficina de agua?
-
-El número de teléfono de la oficina municipal de agua de Jutiapa es 7844-1000. El teléfono está disponible durante el horario de atención: de lunes a viernes de 8:00 a.m. a 4:00 p.m. y sábados de 8:00 a.m. a 12:00 p.m. A través del teléfono se pueden realizar consultas sobre el estado de la cuenta, verificar montos pendientes y reportar emergencias como fugas de agua en la vía pública. Para reportar emergencias fuera del horario de atención, se puede llamar al número de emergencias 7844-1001.
+La atención de lunes a viernes no se interrumpe al mediodía. Se sugiere a los contribuyentes presentarse con anticipación, especialmente durante la primera quincena de cada mes, debido al alto flujo de personas que acuden a pagar su recibo antes del vencimiento.
 
 
-## ¿Cómo puedo comunicarme en caso de emergencia?
+## ¿Cuál es el teléfono de la oficina de agua y qué consultas atiende?
 
-Para emergencias relacionadas con el servicio de agua fuera del horario de atención, como fugas grandes en la tubería principal o daños en la red de distribución, se puede llamar al número de emergencias 7844-1001. Este número está disponible las 24 horas del día, los 7 días de la semana. Las emergencias de fuga dentro de la propiedad del cliente no se consideran emergencia de la red pública y deben atenderse con un fontanero particular.
+El número telefónico principal de la oficina municipal de agua de Jutiapa es el 7844-1000. La central telefónica opera de lunes a viernes de 8:00 a.m. a 4:00 p.m. y sábados de 8:00 a.m. a 12:00 p.m. A través de este número los abonados pueden consultar su saldo pendiente, verificar si su último pago ya fue procesado y reportar fugas. Las consultas de saldo por llamada son puramente informativas, ya que la recepción de pagos y trámites formales requiere acudir a ventanilla.
+
+
+## ¿Cómo puedo comunicarme en caso de emergencia fuera de horario?
+
+Para reportar emergencias críticas fuera del horario administrativo habitual, como roturas de tuberías matrices en la vía pública o fugas masivas en la red comunitaria, la municipalidad dispone de la línea de emergencia 7844-1001. Este canal telefónico de urgencia atiende las 24 horas del día, los 7 días de la semana, incluyendo domingos y días festivos. Es fundamental tener presente que las fugas o averías localizadas dentro de predios privados (después del medidor o contador) deben ser resueltas por un fontanero particular contratado por el dueño del inmueble.

@@ -1,0 +1,2 @@
+# Carpeta local para almacenamiento de base de datos vectorial (ChromaDB) y otros datos en tiempo de ejecución.
+# Esta carpeta está excluida en .gitignore.

@@ -7,9 +7,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Repositorio para la tabla {@code chunk}.
@@ -90,6 +89,41 @@ public class ChunkRepository {
     }
 
     /**
+     * Reemplaza el índice completo dentro de una única transacción.
+     */
+    @Transactional
+    public void reemplazarTodo(List<Chunk> chunks, List<float[]> embeddings) {
+        if (chunks.size() != embeddings.size()) {
+            throw new IllegalArgumentException(
+                    "La cantidad de chunks y embeddings debe coincidir.");
+        }
+
+        reiniciar();
+        List<Object[]> parametros = new ArrayList<>(chunks.size());
+        for (int i = 0; i < chunks.size(); i++) {
+            Chunk chunk = chunks.get(i);
+            parametros.add(new Object[] {
+                    chunk.id(),
+                    chunk.archivo(),
+                    chunk.documento(),
+                    chunk.seccion(),
+                    chunk.actualizacion(),
+                    chunk.orden(),
+                    chunk.texto(),
+                    toVectorLiteral(embeddings.get(i))
+            });
+        }
+
+        jdbc.batchUpdate(
+                """
+                INSERT INTO chunk (id, archivo, documento, seccion, actualizacion, orden, texto, embedding)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?::vector)
+                """,
+                parametros);
+        log.info("ChunkRepository.reemplazarTodo(): {} chunks insertados", chunks.size());
+    }
+
+    /**
      * Cuenta el número total de chunks almacenados.
      *
      * @return Número de filas en la tabla chunk.
@@ -137,8 +171,13 @@ public class ChunkRepository {
      * {@code [0.1,0.2,...,0.n]}.
      */
     private static String toVectorLiteral(float[] embedding) {
-        return Arrays.stream(embedding)
-                .mapToObj(Float::toString)
-                .collect(Collectors.joining(",", "[", "]"));
+        StringBuilder literal = new StringBuilder("[");
+        for (int i = 0; i < embedding.length; i++) {
+            if (i > 0) {
+                literal.append(',');
+            }
+            literal.append(Float.toString(embedding[i]));
+        }
+        return literal.append(']').toString();
     }
 }

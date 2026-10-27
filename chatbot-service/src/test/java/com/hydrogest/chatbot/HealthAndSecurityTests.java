@@ -35,22 +35,26 @@ class HealthAndSecurityTests {
 	void protectedEndpointWithoutApiKeyShouldReturn401() throws Exception {
 		mockMvc.perform(post("/chat"))
 				.andExpect(status().isUnauthorized())
-				.andExpect(jsonPath("$.detail").value("Falta el encabezado de autenticación X-API-Key."));
+				.andExpect(jsonPath("$.error.codigo").value("UNAUTHORIZED"))
+				.andExpect(jsonPath("$.error.mensaje")
+						.value("Falta el encabezado de autenticación X-API-Key."));
 	}
 
 	@Test
-	void protectedEndpointWithInvalidApiKeyShouldReturn403() throws Exception {
+	void protectedEndpointWithInvalidApiKeyShouldReturn401() throws Exception {
 		mockMvc.perform(post("/chat")
 						.header("X-API-Key", "clave-invalida"))
-				.andExpect(status().isForbidden())
-				.andExpect(jsonPath("$.detail").value("X-API-Key inválida o no autorizada."));
+				.andExpect(status().isUnauthorized())
+				.andExpect(jsonPath("$.error.codigo").value("UNAUTHORIZED"))
+				.andExpect(jsonPath("$.error.mensaje")
+						.value("X-API-Key inválida o no autorizada."));
 	}
 
 	@Test
 	void protectedEndpointWithValidApiKeyShouldPassFilter() throws Exception {
-		// Pasa el filtro de API Key (y retorna 404 al no estar implementado aún el controller /chat)
 		mockMvc.perform(post("/chat")
 						.header("X-API-Key", "test-service-key-12345"))
-				.andExpect(status().isNotFound());
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.error.codigo").value("INVALID_REQUEST"));
 	}
 }

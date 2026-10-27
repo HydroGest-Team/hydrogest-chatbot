@@ -53,12 +53,34 @@ Verifica que el servicio esté activo y respondiendo correctamente.
 
 ---
 
-### 3.2 Chat / Consulta RAG (`/chat`) *(Previsto para fase posterior)*
+### 3.2 Chat / Consulta RAG (`/chat`)
 
 - **Método:** `POST`
 - **Ruta:** `/chat`
 - **Autenticación:** Requerida vía `X-API-Key`.
-- **Estado actual:** No implementado en este esqueleto; la dependencia de verificación de `X-API-Key` está lista para ser inyectada.
+- **Cuerpo:**
+  ```json
+  {
+    "session_id": "sesion-123",
+    "mensaje": "¿Cuál es el horario de atención?"
+  }
+  ```
+- `session_id` es obligatorio y admite hasta 100 caracteres.
+- `mensaje` es obligatorio y admite entre 1 y 500 caracteres.
+- **Respuesta exitosa (`200 OK`):**
+  ```json
+  {
+    "respuesta": "....",
+    "fuentes": [
+      {"archivo": "05-horarios-y-contacto.md", "seccion": "...."}
+    ]
+  }
+- **Errores:**
+  - `400`: `{ "error": { "codigo": "INVALID_REQUEST", "mensaje": "..." } }`
+  - `401`: `{ "error": { "codigo": "UNAUTHORIZED", "mensaje": "..." } }`
+  - `429`: `{ "error": { "codigo": "RATE_LIMIT_EXCEEDED", "mensaje": "..." } }`
+  - `503`: `{ "error": { "codigo": "LLM_UNAVAILABLE", "mensaje": "..." } }`
+- El límite se mantiene en memoria y se aplica por `session_id` y por IP.
 
 ---
 

@@ -85,6 +85,15 @@ ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
 RATE_LIMIT_PER_SESSION=10
 RATE_LIMIT_PER_IP=30
 
+# DynamoDB Local (en AWS se usa el proveedor de credenciales por defecto/IAM)
+DYNAMODB_ENDPOINT=http://localhost:8000
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=local
+AWS_SECRET_ACCESS_KEY=local
+DYNAMODB_TABLE=chatbot_conversaciones
+DYNAMODB_CREATE_TABLE=true
+DYNAMODB_TTL_DAYS=30
+
 # Parámetros RAG y Base de Conocimiento
 RAG_TOP_K=4
 UMBRAL_SIMILITUD=0.65
@@ -108,6 +117,11 @@ CONOCIMIENTO_DIR=conocimiento
 | `ALLOWED_ORIGINS` | String | No | *(vacío)* | Orígenes permitidos por la política CORS. |
 | `RATE_LIMIT_PER_SESSION` | Integer | No | `10` | Peticiones por minuto permitidas por `session_id`. |
 | `RATE_LIMIT_PER_IP` | Integer | No | `30` | Peticiones por minuto permitidas por IP. |
+| `DYNAMODB_ENDPOINT` | String | No | *(vacío)* | Endpoint opcional para DynamoDB Local; vacío usa AWS. |
+| `AWS_REGION` | String | No | `us-east-1` | Región del cliente DynamoDB. |
+| `DYNAMODB_TABLE` | String | No | `chatbot_conversaciones` | Tabla donde se registran los intercambios. |
+| `DYNAMODB_CREATE_TABLE` | Boolean | No | `false` | Crea la tabla al iniciar; útil para DynamoDB Local. |
+| `DYNAMODB_TTL_DAYS` | Integer | No | `30` | Días hasta la expiración del atributo TTL. |
 | `RAG_TOP_K` | Integer | No | `4` | Cantidad de chunks más relevantes a recuperar. |
 | `UMBRAL_SIMILITUD` | Double | No | `0.65` | Umbral mínimo de similitud para retrieval. |
 | `CONOCIMIENTO_DIR` | String | No | `conocimiento` | Ruta a los documentos Markdown de conocimiento. |
@@ -185,6 +199,25 @@ El servidor iniciará en `http://localhost:8080`.
   `mensaje` debe tener entre 1 y 500 caracteres. La respuesta exitosa contiene
   `{ "respuesta": "...", "fuentes": [...] }`. Los límites de peticiones son en
   memoria y se aplican por sesión y por IP.
+
+- **Persistencia de conversaciones**:
+  Cada respuesta exitosa se registra de forma best-effort en DynamoDB con
+  `session_id` como clave de partición y `timestamp` como clave de ordenamiento.
+  También se guardan la pregunta, respuesta, fuentes, similitud máxima, si se
+  usó el LLM, latencia y TTL. Un fallo de DynamoDB se registra en el servidor,
+  pero no convierte una respuesta válida del chat en error.
+
+Para iniciar los servicios locales:
+
+```bash
+docker compose up -d postgres dynamodb-local
+```
+
+Con `DYNAMODB_CREATE_TABLE=true`, el servicio crea
+`chatbot_conversaciones` al arrancar si todavía no existe. Las credenciales
+`local` son valores ficticios aceptados por DynamoDB Local y no deben usarse
+en AWS; en AWS se mantienen las credenciales por rol IAM del proveedor
+predeterminado del SDK.
 
 - **Actuator Health:**
   Disponible en `http://localhost:8080/actuator/health`.

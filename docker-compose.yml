@@ -18,6 +18,18 @@ services:
       retries: 5
       start_period: 30s
 
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    container_name: hydrogest-dynamodb
+    restart: unless-stopped
+    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb"]
+    ports:
+      - "${DYNAMODB_PORT:-8000}:8000"
+    volumes:
+      - hydrogest_dynamodb_data:/home/dynamodblocal/data
+
 volumes:
   hydrogest_pgdata:
+    driver: local
+  hydrogest_dynamodb_data:
     driver: local

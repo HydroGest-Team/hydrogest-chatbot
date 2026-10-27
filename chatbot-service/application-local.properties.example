@@ -27,6 +27,15 @@ ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
 RATE_LIMIT_PER_SESSION=10
 RATE_LIMIT_PER_IP=30
 
+# DynamoDB local (AWS usa el proveedor de credenciales por defecto/IAM)
+DYNAMODB_ENDPOINT=http://localhost:8000
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=local
+AWS_SECRET_ACCESS_KEY=local
+DYNAMODB_TABLE=chatbot_conversaciones
+DYNAMODB_CREATE_TABLE=true
+DYNAMODB_TTL_DAYS=30
+
 # Parametros RAG y Base de Conocimiento
 RAG_TOP_K=4
 UMBRAL_SIMILITUD=0.65

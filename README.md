@@ -1,6 +1,9 @@
 Nombre: Franklin Boanerges Lopez Chavarria
+
 Carnet: 0905-23-4498 
+
 Repositorio: https://github.com/HydroGest-Team/hydrogest-chatbot
+
 Modulo asignado: Chatbot con RAG
 
 # HydroGest · Chatbot con RAG para la Oficina del Agua
